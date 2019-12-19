@@ -15,7 +15,7 @@ app.use(cors())
 
 
 app.get('/', (req, res) => {
-  const test = `Testando conexão...`
+  const test = `Tentando conexão...`
 
   res.send(test)
 })
