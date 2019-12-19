@@ -1,10 +1,16 @@
 Hello World!
 
 
-```frontend
+```
+###frontend
 npm install
 
-```api-server
+###api-server
 
 npm install
 node server
+
+###Testes
+  npm run storybook
+  npm run cov
+  npm run test
