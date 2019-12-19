@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import api from '../services/api' 
 
 import Logo from '../assets/kbase_logo.svg'
 
@@ -11,10 +12,22 @@ class SignUp extends Component {
     error: ''
   };
 
-  handleSignUp = e => {
+  handleSignUp = async e => {
     e.preventDefault();
-    alert("Eu vou te registrar");
+    const { username, email, password } = this.state;
+    if (!username || !email || !password) {
+      this.setState({ error: "Preencha todos os dados para se cadastrar" });
+    } else {
+      try {
+        await api.post("/users", { username, email, password });
+        this.props.history.push("/");
+      } catch (err) {
+        console.log(err);
+        this.setState({ error: "Ocorreu um erro ao registrar sua conta." });
+      }
+    }
   };
+
 
   render() {
     return (

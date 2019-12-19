@@ -9,6 +9,7 @@ import NotFound from './components/alert/NotFound'
 import { isAuthenticated } from './services/auth'
 import PostDetail from './containers/PostDetail'
 
+import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 
 import { 
@@ -59,7 +60,8 @@ class App extends Component {
             >
             <Switch>
                 <Route path="/" exact component={Main} />
-                <Route path="" exact component={SignUp} />
+                <Route path="" exact component={SignIn} />
+                <Route path="/signup" exact component={SignUp} />
                 <PrivateRoute path="/perfil" exact component={NewPost} />
                 <PrivateRoute path="/post/novo" exact component={NewPost} />
                 <PrivateRoute path="/:category" exact component={props => <Main {...props} />} />
