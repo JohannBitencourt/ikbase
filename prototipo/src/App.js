@@ -1,14 +1,33 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import Main from './components/Main'
 import NewPost from './components/NewPost'
 import NavbarHeader from './components/NavbarHeader'
+import { isAuthenticated } from './services/auth'
 import PostDetail from './containers/PostDetail'
+import { 
+ Route, 
+ Switch, 
+ Redirect,
+ BrowserRouter 
+} from 'react-router-dom'
 
 const drawerWidth = 240;
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      )
+    }
+  />
+);
 
 class App extends Component {
   state = {
@@ -35,7 +54,8 @@ class App extends Component {
               })}
             >
               <Switch>
-                <Route path="/" exact component={Main} />
+                <Route path="/home" exact component={Main} />
+                <Route path="/perfil" exact component={NewPost} />
                 <Route path="/post/novo" exact component={NewPost} />
                 <Route path="/:category" exact component={props => <Main {...props} />} />
                 <Route path="/:category/:id" exact component={props => <PostDetail {...props} />} />

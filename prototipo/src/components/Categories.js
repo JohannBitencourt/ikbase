@@ -7,6 +7,7 @@ import Favorite from '@material-ui/icons/Favorite'
 import Home from '@material-ui/icons/Home'
 import Share from '@material-ui/icons/Share'
 import School from '@material-ui/icons/School'
+import Person from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom'
 import _ from 'lodash';
 
@@ -41,6 +42,15 @@ class Categories extends Component {
           <ListItem>
             <ListItemIcon>{this.renderIcon('inicio')}</ListItemIcon>
               <ListItemText primary="Início" />
+          </ListItem>
+        </Link>
+        <Link to="/perfil"
+              style={linkStyle}>
+          <ListItem>
+            <ListItemIcon>
+                <Person />
+            </ListItemIcon>
+              <ListItemText primary="Perfil" />
           </ListItem>
         </Link>
         {_.map(categories, category => {

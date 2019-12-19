@@ -4,7 +4,6 @@ import {
   FETCH_POST_ID,
   FETCH_CATEGORY_POSTS,
   POST_WAS_DELETED,
-  POST_WAS_EDITED,
   POST_WAS_VOTED,
 } from '../actions/types'
 
@@ -23,11 +22,6 @@ export default function (state = INITIAL_STATE, action) {
       return _.mapKeys(action.payload, 'id')
     case POST_WAS_DELETED:
       return _.omit(state, action.payload)
-    case POST_WAS_EDITED:
-      return {
-        ...state,
-        [action.payload.id]: action.payload
-      }
     case POST_WAS_VOTED:
       return {
         ...state,
