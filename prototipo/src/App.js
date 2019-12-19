@@ -5,8 +5,12 @@ import { withStyles } from '@material-ui/core/styles'
 import Main from './components/Main'
 import NewPost from './components/NewPost'
 import NavbarHeader from './components/NavbarHeader'
+import NotFound from './components/alert/NotFound'
 import { isAuthenticated } from './services/auth'
 import PostDetail from './containers/PostDetail'
+
+import SignUp from './components/SignUp'
+
 import { 
  Route, 
  Switch, 
@@ -53,13 +57,15 @@ class App extends Component {
                 [classes.contentShift]: open,
               })}
             >
-              <Switch>
-                <Route path="/home" exact component={Main} />
-                <Route path="/perfil" exact component={NewPost} />
-                <Route path="/post/novo" exact component={NewPost} />
-                <Route path="/:category" exact component={props => <Main {...props} />} />
-                <Route path="/:category/:id" exact component={props => <PostDetail {...props} />} />
-              </Switch>
+            <Switch>
+                <Route path="/" exact component={Main} />
+                <Route path="" exact component={SignUp} />
+                <PrivateRoute path="/perfil" exact component={NewPost} />
+                <PrivateRoute path="/post/novo" exact component={NewPost} />
+                <PrivateRoute path="/:category" exact component={props => <Main {...props} />} />
+                <PrivateRoute path="/:category/:id" exact component={props => <PostDetail {...props} />} />
+                <Route path="*" component={NotFound} />
+            </Switch>
             </main>
         </div>
       </BrowserRouter>
