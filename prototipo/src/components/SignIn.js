@@ -35,7 +35,7 @@ const styled = createMuiTheme({
   },
 });
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     logo: {
         marginTop: theme.spacing(5),
     },
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         margin: theme.spacing(3, 0, 3),
     },
-}));
+});
 
 class SignIn extends Component {
   state = {
@@ -90,7 +90,7 @@ class SignIn extends Component {
 
   render() {
 
-    const classes = useStyles();
+    const { classes } = this.props;
 
     return (
 
@@ -163,4 +163,4 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(SignIn);
+export default withRouter(SignIn)(styles);
