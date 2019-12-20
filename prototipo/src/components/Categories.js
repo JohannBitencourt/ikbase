@@ -9,7 +9,7 @@ import Share from '@material-ui/icons/Share'
 import School from '@material-ui/icons/School'
 import Person from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom'
-import _ from 'lodash';
+import _ from 'lodash'
 
 import { capitalize } from '../helpers/capitalize'
 
@@ -53,7 +53,7 @@ class Categories extends Component {
               <ListItemText primary="Perfil" />
           </ListItem>
         </Link>
-        {_.map(categories, category => {
+        {_.map(categories, category => { /* Rota privada */
           return (
             <Link to={`/${category.path}`}
               onClick={() => fetchCategoryPosts(category.path)}

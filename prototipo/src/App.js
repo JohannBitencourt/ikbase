@@ -59,10 +59,10 @@ class App extends Component {
               })}
             >
             <Switch>
-                <Route path="/" exact component={Main} />
-                <Route path="" exact component={SignIn} />
+                <Route path="/home" exact component={Main} />
+                <Route path="/" exact component={SignIn} />
                 <Route path="/signup" exact component={SignUp} />
-                <Route path="/perfil" exact component={NewPost} />
+                <PrivateRoute path="/perfil" exact component={NewPost} />
                 <Route path="/post/novo" exact component={NewPost} />
                 <Route path="/:category" exact component={props => <Main {...props} />} />
                 <Route path="/:category/:id" exact component={props => <PostDetail {...props} />} />
