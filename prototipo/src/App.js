@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
+
 import Main from './components/Main'
 import NewPost from './components/NewPost'
 import NavbarHeader from './components/NavbarHeader'
 import NotFound from './components/alert/NotFound'
 import { isAuthenticated } from './services/auth'
 import PostDetail from './containers/PostDetail'
-
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
+import Profile from './components/Profile'
 
 import { 
  Route, 
@@ -28,7 +29,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       isAuthenticated() ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
       )
     }
   />
@@ -59,10 +60,10 @@ class App extends Component {
               })}
             >
             <Switch>
-                <Route path="/home" exact component={Main} />
-                <Route path="/" exact component={SignIn} />
+                <Route path="/" exact component={Main} />
+                <Route path="/login" exact component={SignIn} />
                 <Route path="/signup" exact component={SignUp} />
-                <PrivateRoute path="/perfil" exact component={NewPost} />
+                <PrivateRoute path="/perfil" exact component={Profile} />
                 <Route path="/post/novo" exact component={NewPost} />
                 <Route path="/:category" exact component={props => <Main {...props} />} />
                 <Route path="/:category/:id" exact component={props => <PostDetail {...props} />} />

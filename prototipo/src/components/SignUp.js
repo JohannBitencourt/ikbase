@@ -1,10 +1,37 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import api from '../services/api' 
+import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
 import Logo from '../assets/kbase_logo.svg'
+import api from '../services/api'
 
-class SignUp extends Component {
+import { styled } from '../helpers/styled'
+import { 
+ Paper,
+ withStyles, 
+ Grid, 
+ TextField, 
+ Button, 
+ FormControlLabel, 
+ Checkbox
+} from '@material-ui/core'
+
+const styles = theme => ({
+    logo: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    margin: {
+      margin: theme.spacing.unit * 2,
+    },
+    padding: {
+      padding: theme.spacing.unit * 10,
+      marginTop: 75,
+      flexGrow: 1,
+    }
+});
+
+class SignIn extends React.Component {
   state = {
     username: '',
     email: '',
@@ -29,33 +56,87 @@ class SignUp extends Component {
   };
 
 
-  render() {
-    return (
-
-        <div onSubmit={this.handleSignUp}>
-            <img src={Logo} alt="kbase_logo"/>
-            {this.state.error && <p>{this.state.error}</p>}
-            <input
-            type="text"
-            placeholder="Nome de usuário"
-            onChange={e => this.setState({ username: e.target.value })}
-            />
-            <input
-            type="email"
-            placeholder="Endereço de e-mail"
-            onChange={e => this.setState({ email: e.target.value })}
-            />
-            <input
-            type="password"
-            placeholder="Senha"
-            onChange={e => this.setState({ password: e.target.value })}
-            />
-            <button type="submit">Cadastrar grátis</button>
-            <hr />
-            <Link to="/">Fazer login</Link>
-        </div>
-    );
-  }
+    render() {
+        const { classes } = this.props;
+        return (
+          <div className={styled} onSubmit={this.handleSignUp}>
+            <Paper className={classes.padding} >
+              <img className={classes.logo} src={Logo} alt="logo"/>
+              {this.state.error && <p>{this.state.error}</p>}
+                <div className={classes.margin}>
+                <Grid container spacing={8} alignItems="flex-end">
+                  <Grid item md={true} sm={true} xs={true}>
+                      <TextField 
+                        id="username" 
+                        label="Nome" 
+                        type="username"
+                        color="primary"
+                        onChange={e => this.setState({ username: e.target.value })}
+                        fullWidth 
+                        autoFocus required />
+                  </Grid>
+                </Grid>
+                <Grid container spacing={8} alignItems="flex-end">
+                    <Grid item md={true} sm={true} xs={true}>
+                        <TextField 
+                          id="email" 
+                          label="Endereço de email" 
+                          type="email"
+                          color="primary"
+                          onChange={e => this.setState({ email: e.target.value })}
+                          fullWidth 
+                          autoFocus required />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={8} alignItems="flex-end">
+                    <Grid item md={true} sm={true} xs={true}>
+                        <TextField 
+                        id="password" 
+                        label="Senha" 
+                        type="password"
+                        onChange={e => this.setState({ password: e.target.value })}
+                        fullWidth required />
+                    </Grid>
+                </Grid>
+                <Grid container alignItems="center" justify="space-between">
+                    <Grid item>
+                        <FormControlLabel control={
+                            <Checkbox
+                                color="primary"
+                            />
+                        } label="Lembrar" />
+                    </Grid>
+                    <Grid item>
+                        <Button 
+                          disableFocusRipple 
+                          disableRipple 
+                          style={{ textTransform: "none" }} 
+                          component={Link} to={"/login"}
+                          variant="text" color="primary"
+                          >
+                            Fazer login
+                        </Button>
+                    </Grid>
+                    </Grid>
+                    <Grid 
+                      container 
+                      justify="center" 
+                      style={{ marginTop: '10px' }}
+                    >
+                      <Button 
+                        variant="outlined" 
+                        color="primary" 
+                        type="submit"
+                        style={{ textTransform: "none" }}
+                        >
+                        Entrar
+                      </Button>
+                    </Grid>
+                </div>
+            </Paper>
+          </div>
+        );
+    }
 }
 
-export default SignUp;
+export default withRouter(withStyles(styles)(SignIn));

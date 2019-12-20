@@ -14,7 +14,7 @@ app.use(express.static('public'))
 app.use(cors())
 
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   const test = `Tentando conexão...`
 
   res.send(test)
