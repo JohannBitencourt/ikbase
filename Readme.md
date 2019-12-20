@@ -11,4 +11,7 @@ cd prototipo/api-server
 npm install
 node server
 
+dumb
+incompleto :c
+
 ```
