@@ -4,7 +4,7 @@
   "author": "Johann Gomes <johann.bitencourt@gmail.com>",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "chai": "^4.2.0",
     "codecov": "^3.1.0",
     "dotenv": "^6.2.0",
